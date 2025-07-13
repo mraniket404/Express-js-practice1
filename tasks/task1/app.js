@@ -1,0 +1,215 @@
+// core modules
+// const http = require('http');
+
+//external modules
+const express = require('express');
+
+// local modules
+
+// adding middleware
+
+const app = express();
+app.use((req, res, next) => {
+    console.log('frist request received');
+    next();
+})
+
+app.use((req, res, next) => {
+    console.log('second request received');
+    res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login Page</title>
+        <style>
+            /* Reset and Base Styles */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Arial', sans-serif;
+            }
+            
+            body {
+                background-color: #f5f5f5;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                padding: 20px;
+            }
+            
+            /* Login Container */
+            .login-container {
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
+                padding: 40px;
+                text-align: center;
+            }
+            
+            .login-header {
+                margin-bottom: 30px;
+            }
+            
+            .login-header h1 {
+                color: #333;
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+            
+            .login-header p {
+                color: #777;
+                font-size: 14px;
+            }
+            
+            /* Form Elements */
+            .form-group {
+                margin-bottom: 20px;
+                text-align: left;
+            }
+            
+            .form-group label {
+                display: block;
+                margin-bottom: 8px;
+                color: #555;
+                font-size: 14px;
+                font-weight: 600;
+            }
+            
+            .form-group input {
+                width: 100%;
+                padding: 12px 15px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 16px;
+                transition: border-color 0.3s;
+            }
+            
+            .form-group input:focus {
+                border-color: #4285f4;
+                outline: none;
+            }
+            
+            /* Remember Me & Forgot Password */
+            .form-options {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+                font-size: 14px;
+            }
+            
+            .remember-me {
+                display: flex;
+                align-items: center;
+            }
+            
+            .remember-me input {
+                margin-right: 8px;
+            }
+            
+            .forgot-password a {
+                color: #4285f4;
+                text-decoration: none;
+            }
+            
+            .forgot-password a:hover {
+                text-decoration: underline;
+            }
+            
+            /* Submit Button */
+            .login-button {
+                width: 100%;
+                padding: 12px;
+                background-color: #4285f4;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            
+            .login-button:hover {
+                background-color: #3367d6;
+            }
+            
+            /* Sign Up Link */
+            .signup-link {
+                margin-top: 20px;
+                font-size: 14px;
+                color: #777;
+            }
+            
+            .signup-link a {
+                color: #4285f4;
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            .signup-link a:hover {
+                text-decoration: underline;
+            }
+            
+            /* Responsive Adjustments */
+            @media (max-width: 480px) {
+                .login-container {
+                    padding: 30px 20px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="login-container">
+            <div class="login-header">
+                <h1>Welcome Back</h1>
+                <p>Please enter your credentials to login</p>
+            </div>
+            
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#">Forgot password?</a>
+                    </div>
+                </div>
+                
+                <button type="submit" class="login-button">Login</button>
+            </form>
+            
+            <div class="signup-link">
+                Don't have an account? <a href="#">Sign up</a>
+            </div>
+        </div>
+    </body>
+    </html>    
+    `)
+    next();
+});
+
+
+
+
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+});
