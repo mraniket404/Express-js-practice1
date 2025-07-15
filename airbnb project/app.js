@@ -6,15 +6,16 @@ const userRouter = require('./routes/userRouter');
 const hostRouter = require('./routes/hostRouter');
 const utilpath = require('./utils/utilpath');
 
+
 const app = express();
 
-// app.use((req, res, next) => {
-//     console.log( req.method, req.url, req.body);
-//     next();
-// })
+app.set('view engine', 'ejs');
 
+
+
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(userRouter);
 
 app.use(hostRouter);
